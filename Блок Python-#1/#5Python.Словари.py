@@ -482,3 +482,62 @@ has_time = "time" in event.keys()
 is_free = False in event.values()
 no_place = "place" not in event.keys()
 print(has_time, is_free, no_place)
+
+# Задача #36. | Добавление и обновление элементов словаря
+# У вас есть словарь: team = {'project': 'Автоматизация', 'members': 3, 'active': True}
+# 1. Обновите значение ключа 'members' на 5.
+# 2. Добавьте новый ключ 'lead' со значением 'Мария'.
+# 3. Добавьте еще один новый ключ 'tools' со значением ['pytest', 'selenium'].
+# 4. Выведите на экран текущее количество элементов (длину) словаря.
+team = {'project': 'Автоматизация', 'members': 3, 'active': True}
+team["members"] = 5
+team["lead"] = "Мария"
+team["tools"] = ['pytest', 'selenium']
+print(len(team))
+
+# Задача #37. | Удаление элементов словаря
+# Дан словарь: server = {'name': 'WebServer', 'os': 'Ubuntu', 'ram': 32, 'ip': '192.168.1.1', 'active': True}
+# 1. Удалите элемент с ключом 'ip' с помощью оператора del.
+# 2. Удалите элемент с ключом 'ram', используя метод, который возвращает удалённое значение.
+#    Сохраните это значение в переменную 'ram_size'.
+# 3. Выведите на экран:
+#    - Итоговый словарь
+#    - Значение переменной 'ram_size' с пояснением: "Удалено RAM: <значение> ГБ"
+server = {'name': 'WebServer', 'os': 'Ubuntu', 'ram': 32, 'ip': '192.168.1.1', 'active': True}
+del server["ip"]
+ram_size = server.pop("ram")
+print(server)
+print(f"Удалено RAM: {ram_size} ГБ")
+
+# Задача #38. | Получение элементов, ключей и значений словаря
+# Дан словарь: transport = {'bus': 10, 'tram': 5, 'metro': 15, 'taxi': 8}
+# 1. Получите список всех ключей словаря и сохраните его в переменную 'transport_types'.
+# 2. Получите список всех значений словаря и сохраните его в переменную 'transport_counts'.
+# 3. Выведите на экран второй элемент списка transport_types.
+# 4. Выведите на экран третий элемент списка transport_counts.
+transport = {'bus': 10, 'tram': 5, 'metro': 15, 'taxi': 8}
+transport_types = transport.keys()
+transport_counts = transport.values()
+print(list(transport_types)[1])
+print(list(transport_counts)[2])
+
+# Задача #39. | Создание словаря
+# 1. Создайте словарь 'currency' с помощью функции dict(), передав ей именованные аргументы (ключ=значение).
+#    Ключи и значения: usd=85, eur=92, cny=12.
+# 2. Выведите на экран значение ключа 'eur'.
+# 3. Выведите на экран общее количество элементов в словаре.
+currency = dict(usd=85, eur=92, cny=12)
+print(currency["eur"])
+print(len(currency))
+
+# Задача #40. | Проверка на наличие ключей и значений
+# Дан словарь: student = {'name': 'Анна', 'grade': 5, 'subject': 'математика', 'exam_passed': True}
+# 1. Проверьте, есть ли в словаре ключ 'grade'. Результат сохраните в переменную 'has_grade'.
+# 2. Проверьте, есть ли в словаре значение 'математика'. Результат сохраните в переменную 'has_math'.
+# 3. Проверьте, отсутствует ли ключ 'teacher' в словаре. Результат сохраните в переменную 'no_teacher'.
+# 4. Выведите все три переменные на экран в одну строку через дефис (например: True-True-False).
+student = {'name': 'Анна', 'grade': 5, 'subject': 'математика', 'exam_passed': True}
+has_grade = "grade" in student.keys()
+has_math = "математика" in student.values()
+no_teacher = 'teacher' not in student.keys()
+print(str(has_grade) + '-' + str(has_math) + '-' + str(no_teacher))
