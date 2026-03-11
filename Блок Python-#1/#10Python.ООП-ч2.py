@@ -902,3 +902,58 @@ car = Car("Toyota", "Corolla", 4)
 print(car.info())
 print(hasattr(car, "doors"))
 print(hasattr(car, "brand"))
+
+# Задание 36: Наследование и удаление атрибутов
+# 1. Создай класс `Person` с методом `__init__`, который принимает `name` и `age`.
+# 2. Создай класс `Employee(Person)` с методом `__init__`, который принимает `name`, `age`, `salary`.
+#    Вызови super().__init__(name, age) и сохрани `salary`.
+# 3. Создай объект `emp = Employee("Анна", 30, 50000)`.
+# 4. Выведи все атрибуты объекта через `emp.__dict__`.
+# 5. Удали атрибут `salary` через `del emp.salary`.
+# 6. Выведи `emp.__dict__` снова.
+# 7. Попробуй удалить атрибут `name` и посмотри что будет (закомментируй эту строку).
+# Подсказка: __dict__ показывает все атрибуты объекта.
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+class Employee(Person):
+    def __init__(self, name, age, salary):
+        super().__init__(name, age)
+        self.salary = salary
+emp = Employee("Анна", 30, 20000)
+print(emp.__dict__)
+del emp.salary
+print(emp.__dict__)
+
+# Задание 37: Наследование и getattr
+# 1. Создай класс `Device` с методом `__init__`, который принимает `brand` и `model`.
+# 2. Создай класс `Smartphone(Device)` с методом `__init__`, который принимает `brand`, `model`, `os`.
+#    Вызови super().__init__(brand, model) и сохрани `os`.
+# 3. Создай объект `phone = Smartphone("Samsung", "Galaxy S21", "Android")`.
+# 4. Используя `getattr`, выведи значение атрибута `brand`.
+# 5. Используя `getattr`, выведи значение атрибута `os`.
+# 6. Используя `getattr`, попробуй получить несуществующий атрибут `color` с значением по умолчанию "чёрный".
+# Подсказка: getattr(объект, "имя", значение_по_умолчанию)
+class Device:
+    def __init__(self, brand, model):
+        self.brand = brand
+        self.model = model
+class Smartphone(Device):
+    def __init__(self, brand, model, os):
+        super().__init__(brand, model)
+        self.os = os
+phone = Smartphone("Samsung", "Galaxy S21", "Android")
+print(getattr(phone, "brand"))
+print(getattr(phone, "os"))
+print(getattr(phone, "color", "черный"))
+
+# Задание 38: Наследование и setattr
+# 1. Создай класс `Product` с методом `__init__`, который принимает `name` и `price`.
+# 2. Создай класс `DiscountedProduct(Product)` с методом `__init__`, который принимает `name`, `price`, `discount`.
+#    Вызови super().__init__(name, price) и сохрани `discount`.
+# 3. Создай объект `item = DiscountedProduct("Телефон", 30000, 10)`.
+# 4. Используя `setattr`, измени цену на 25000.
+# 5. Используя `setattr`, добавь новый атрибут `warranty` со значением 12.
+# 6. Выведи все атрибуты объекта через `item.__dict__`.
+# Подсказка: setattr(объект, "имя", значение)
