@@ -549,3 +549,79 @@ class Rectangle:
     @property
     def perimeter(self):
         return 2 * (self.width + self.height)
+
+# Задача №36 | Магический метод __str__
+# 1. Создай класс Song.
+# 2. Добавь конструктор, который принимает title (название) и artist (исполнитель).
+# 3. Добавь магический метод __str__, который возвращает строку:
+#    f"'{title}' by {artist}"
+# 4. Код должен содержать только объявление класса.
+class Song:
+    def __init__(self, title, artist):
+        self.title = title
+        self.artist = artist
+    def __str__(self):
+        return f"'{self.title}' by {self.artist}"
+
+# Задача №37 | Статический метод
+# 1. Создай класс Calculator.
+# 2. Добавь статический метод add, который принимает два числа и возвращает их сумму.
+# 3. Добавь статический метод multiply, который принимает два числа и возвращает их произведение.
+# 4. Код должен содержать только объявление класса.
+class Calculator:
+    @staticmethod
+    def add( a, b):
+        return a + b
+    @staticmethod
+    def multiply(a, b):
+        return a * b
+
+# Задача №38 | Наследование
+# 1. Создай класс Device.
+# 2. Добавь конструктор, который принимает brand и model.
+# 3. Добавь метод get_info, который возвращает строку f"Device: {brand} {model}".
+# 4. Создай класс Smartphone, который наследует от Device.
+# 5. В классе Smartphone переопредели метод get_info так, чтобы он возвращал
+#    f"Smartphone: {brand} {model}"
+# 6. Код должен содержать только объявление классов.
+class Device:
+    def __init__(self, brand, model):
+        self.brand = brand
+        self.model = model
+    def get_info(self):
+        return f"Device: { self.brand} {self.model}"
+class Smartphone(Device):
+    def get_info(self):
+        return f"Smartphone: {self.brand} {self.model}"
+
+# Задача №39 | super() в методах
+# 1. Создай класс Animal.
+# 2. Добавь метод speak, который возвращает строку "Animal speaks".
+# 3. Создай класс Cat, который наследует от Animal.
+# 4. Переопредели метод speak так, чтобы он сначала вызывал родительский метод speak через super(),
+#    а затем возвращал строку "Meow!".
+#    (Подсказка: можно сохранить результат родительского метода и вернуть его + " Meow!")
+# 5. Код должен содержать только объявление классов.
+class Animal:
+    def speak(self):
+        return "Animal speaks"
+class Cat(Animal):
+    def speak(self):
+        return super().speak() + " Meow!"
+
+# Задача №40 | Классовые атрибуты и методы
+# 1. Создай класс School.
+# 2. Добавь общий (классовый) атрибут students_count = 0.
+# 3. Добавь конструктор, который принимает name школы и увеличивает students_count на 1.
+# 4. Добавь классовый метод total_students, который возвращает строку:
+#    f"Всего учеников: {students_count}"
+# 5. Код должен содержать только объявление класса.
+
+class School:
+    students_count = 0
+    def __init__(self, name):
+        self.name = name
+        School.students_count += 1
+    @classmethod
+    def total_students(cls):
+        return f"Всего учеников: {cls.students_count}"

@@ -2,6 +2,7 @@
 # Записать строку "Привет, файл!" в новый файл 'greeting.txt'.
 import csv
 import json
+from dataclasses import field
 from os import write
 
 with open("data.txt", "w", encoding="utf-8") as file:
@@ -317,3 +318,53 @@ colors = ['Красный', 'Синий', 'Зелёный']
 with open("colors.txt", "w", encoding="utf-8") as file:
     for color in colors:
         file.write(color + "\n")
+
+# Задача 36 (Работа с файлами - простое чтение с префиксом)
+# Прочитайте файл 'colors.txt' построчно.
+# Для каждой прочитанной строки выведите на экран слово "Цвет:" и саму строку.
+# Пример вывода:
+# Цвет: Красный
+# Цвет: Синий
+# Цвет: Зелёный
+# Используйте контекстный менеджер with.
+with open("colors.txt", "r", encoding="utf-8") as file:
+    for line in file:
+        line = line.strip()
+        print(f"Цвет: {line}")
+
+# Задача 37 (Работа с файлами - запись нескольких строк из списка)
+# Дан список: fruits = ['Яблоко', 'Банан', 'Апельсин']
+# Создайте файл 'fruits.txt' и запишите в него каждый фрукт с новой строки.
+# Используйте контекстный менеджер with.
+fruits = ['Яблоко', 'Банан', 'Апельсин']
+with open("fruits.txt", "w", encoding="utf-8") as file:
+    for fruit in fruits:
+        file.write(fruit + "\n")
+
+# Задача 38 (Работа с файлами - чтение и подсчёт строк)
+# Прочитайте файл 'fruits.txt'.
+# Подсчитайте, сколько фруктов (строк) в файле.
+# Выведите результат: 'Всего фруктов: [число]'.
+# Используйте контекстный менеджер with.
+with open("fruits.txt", "r", encoding="utf-8") as file:
+    count = 0
+    for line in file:
+        count += 1
+    print(f"Всего фруктов: {count}")
+
+# Задача 39 (Работа с файлами - копирование файла)
+# 1. Прочитайте всё содержимое файла 'fruits.txt'.
+# 2. Создайте новый файл 'fruits_copy.txt'.
+# 3. Запишите в новый файл прочитанное содержимое.
+# Используйте контекстный менеджер with (можно два раза).
+with open("fruits.txt", "r", encoding="utf-8") as file:
+    read = file.read()
+with open("fruits_copy.txt", "w", encoding="utf-8") as file:
+    file.write(read)
+
+# Задача 40 (Работа с файлами - добавление строки в существующий файл)
+# Откройте файл 'fruits.txt' и добавьте в его конец новый фрукт: 'Киви'.
+# Новая запись должна быть на отдельной строке.
+# Используйте контекстный менеджер with.
+with open("fruits.txt", "a", encoding="utf-8") as file:
+    file.write("\nКиви")
