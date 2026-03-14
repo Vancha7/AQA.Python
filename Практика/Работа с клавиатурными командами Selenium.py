@@ -13,9 +13,7 @@ time.sleep(1)
 elements.send_keys(Keys.BACKSPACE)
 time.sleep(1)
 elements.send_keys("Василий Федорович")
-
 time.sleep(1)
-
 elements.send_keys(Keys.CONTROL + "A")
 time.sleep(1)
 elements.send_keys(Keys.BACKSPACE)
