@@ -25,6 +25,7 @@
 from selenium import webdriver
 import time
 
+#Пример работы опции включения режима инкогнито в браузере.
 options = webdriver.ChromeOptions()
 options.add_argument('--incognito')
 driver = webdriver.Chrome(options=options)
