@@ -1,6 +1,7 @@
 from selenium import webdriver
 import time
-
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.devtools.v143.fed_cm import click_dialog_button
 
 options = webdriver.ChromeOptions()
@@ -56,4 +57,21 @@ FILE_CRED = ("xpath", "//input[@id = 'uploadFile']")                            
 elemens_cred = driver.find_element(*FILE_CRED)                                      #Обращаемся к кнопке через переменную.
 time.sleep(1)
 elemens_cred.send_keys(r"C:\Users\User\PycharmProjects\AQA.Python\upload.gpeg")     #Через команду "send.keys()" загружаем файл на сайт.
+time.sleep(2)
+
+DINAMIC_P = ("xpath", "//span[text()= 'Dynamic Properties']")
+elements_p = driver.find_element(*DINAMIC_P)
+elements_p.click()
 time.sleep(1)
+wait = WebDriverWait(driver, 30, poll_frequency=1)
+ADD_ELEMENT_BUTTON = ("xpath", "//button[@id='enableAfter']")
+DELETE_BUTTON = ("xpath", "//button[@id='visibleAfter']")
+print("Ожидание активации кнопки...")
+wait.until(EC.element_to_be_clickable(ADD_ELEMENT_BUTTON))                            # Ждем пока кнопка станет кликабельной
+print("✓ Кнопка стала кликабельной")
+driver.find_element(*ADD_ELEMENT_BUTTON).click()
+print("✓ Клик по кнопке выполнен")
+print("Ожидание появления второй кнопки...")
+wait.until(EC.visibility_of_element_located(DELETE_BUTTON))                           # Ждем пока элемент станет видимым
+print("✓ Вторая кнопка стала видимой")
+time.sleep(5)
