@@ -957,3 +957,81 @@ print(getattr(phone, "color", "черный"))
 # 5. Используя `setattr`, добавь новый атрибут `warranty` со значением 12.
 # 6. Выведи все атрибуты объекта через `item.__dict__`.
 # Подсказка: setattr(объект, "имя", значение)
+class Product:
+    def __init__(self, name, price):
+        self.name = name
+        self.price = price
+class DiscountedProduct(Product):
+    def __init__(self, name, price, discount):
+        super().__init__(name, price)
+        self.discount = discount
+item = DiscountedProduct("Телефон", 30000, 10)
+setattr(item, "price", 25000)
+setattr(item, "warranty", 12)
+print(item.__dict__)
+
+# Задание 39: Наследование и property с проверкой
+# 1. Создай класс `BankAccount` с защищённым атрибутом `_balance` (в __init__ передаётся начальный баланс).
+# 2. Добавь свойство `balance` (геттер), которое возвращает `_balance`.
+# 3. Добавь сеттер `balance`, который проверяет:
+#    - Если новое значение меньше 0, выводит "Баланс не может быть отрицательным"
+#    - Иначе присваивает `_balance`
+# 4. Создай класс `SavingsAccount(BankAccount)`, внутри `pass`.
+# 5. Создай объект `acc = SavingsAccount(1000)`.
+# 6. Выведи баланс.
+# 7. Попробуй установить отрицательный баланс: `acc.balance = -500`.
+# 8. Установи баланс 2000 и выведи его.
+# Подсказка: property наследуется и работает так же.
+class BankAccount:
+    def __init__(self, balance):
+        self._balance = balance
+    @property
+    def balance(self):
+        return self._balance
+    @balance.setter
+    def balance(self, value):
+        if value < 0:
+            print("Баланс не может быть отрицательным")
+        else:
+            self._balance = value
+class SavingsAccount(BankAccount):
+    pass
+acc = SavingsAccount(1000)
+print(acc.balance)
+acc.balance = -500
+acc.balance = 2000
+print(acc.balance)
+
+# Задание 40: Финальная - всё вместе просто
+# 1. Создай класс `Animal` с методом `__init__`, который принимает `name`.
+# 2. Добавь метод `speak`, который возвращает f"{self.name} издаёт звук".
+# 3. Создай класс `Dog(Animal)`:
+#    - Переопредели метод `speak`, чтобы он возвращал f"{self.name} говорит Гав!"
+#    - Добавь метод `fetch`, который возвращает f"{self.name} приносит палку"
+# 4. Создай класс `Cat(Animal)`:
+#    - Переопредели метод `speak`, чтобы он возвращал f"{self.name} говорит Мяу!"
+#    - Добавь метод `scratch`, который возвращает f"{self.name} точит когти"
+# 5. Создай объекты `dog = Dog("Бобик")` и `cat = Cat("Мурка")`.
+# 6. Вызови и выведи все методы для обоих объектов.
+# Подсказка: просто покажи, что умеют делать собака и кошка.
+class Animal:
+    def __init__(self, name):
+        self.name = name
+    def speak(self):
+        return f"{self.name} издаёт звук"
+class Dog(Animal):
+    def speak(self):
+        return f"{self.name} говорит Гав!"
+    def fetch(self):
+        return f"{self.name} приносит палку"
+class Cat(Animal):
+    def speak(self):
+        return f"{self.name} говорит Мяу!"
+    def scratch(self):
+        return f"{self.name} точит когти"
+dog = Dog("Бобик")
+cat = Cat("Мурка")
+print(dog.speak())
+print(dog.fetch())
+print(cat.speak())
+print(cat.scratch())
