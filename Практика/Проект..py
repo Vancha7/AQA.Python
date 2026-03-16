@@ -1,8 +1,11 @@
 from selenium import webdriver
-import time
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.devtools.v143.fed_cm import click_dialog_button
+from selenium.webdriver.chrome.options import Options
+import time
+
 
 options = webdriver.ChromeOptions()
 options.add_argument('--incognito')
@@ -19,6 +22,8 @@ TEXT_BOX = ("xpath", "//span[@class = 'text']")
 click_text = driver.find_element(*TEXT_BOX)                                    #Переходим в раздел "Text Box"
 click_text.click()
 time.sleep(1)
+
+#Переходим к разделу заполнения полей.
 
 element_full_name = driver.find_element("xpath", "//input[@id = 'userName']")   # В переменную ложим путь до поля.
 element_full_name.clear()                                                       # Элемент поля.
@@ -48,6 +53,7 @@ elements_address_as = elements_address.get_attribute("value")
 assert "Краснодарский Край, Калининский район, Гривенская." in elements_address_as
 time.sleep(1)
 
+#Переход к разделу по загрузке файлов.
 UPPLOAD = ("xpath", "//span[text()= 'Upload and Download']")
 elements_upload = driver.find_element(*UPPLOAD)
 elements_upload.click()
@@ -59,9 +65,11 @@ time.sleep(1)
 elemens_cred.send_keys(r"C:\Users\User\PycharmProjects\AQA.Python\upload.gpeg")     #Через команду "send.keys()" загружаем файл на сайт.
 time.sleep(2)
 
+#Переход к разделу по динамическим элементам.
 DINAMIC_P = ("xpath", "//span[text()= 'Dynamic Properties']")
 elements_p = driver.find_element(*DINAMIC_P)
 elements_p.click()
+
 time.sleep(1)
 wait = WebDriverWait(driver, 30, poll_frequency=1)
 ADD_ELEMENT_BUTTON = ("xpath", "//button[@id='enableAfter']")
@@ -75,3 +83,48 @@ print("Ожидание появления второй кнопки...")
 wait.until(EC.visibility_of_element_located(DELETE_BUTTON))                           # Ждем пока элемент станет видимым
 print("✓ Вторая кнопка стала видимой")
 time.sleep(5)
+
+#Аллерт.
+ALLERTS_DIV = ("xpath", "//div[contains(@class, 'header-text') and contains(text(), 'Alerts')]")
+driver.find_element(*ALLERTS_DIV).click()
+time.sleep(1)
+print("Открыт выпадающий список Аллерт...")
+
+#Аллерт: Да.
+ALLERST_1 = ("xpath", "//span[text() = 'Alerts']")
+driver.find_element(*ALLERST_1).click()
+time.sleep(1)
+print("Открыт раздел Allerts...")
+driver.find_element("xpath", "//button[@id='alertButton']").click()
+time.sleep(1)
+print("Нажата кнопка Allerts...")
+alert = driver.switch_to.alert
+time.sleep(1)
+alert.accept()
+print("Allerts принят.")
+
+#Аллерт с тайматом после нажатия кнопки 5 сек.
+ALLERST_2 = ("xpath", "//button[@id = 'timerAlertButton']")
+driver.find_element(*ALLERST_2).click()
+time.sleep(1)
+alert = wait.until(EC.alert_is_present())            #Ожидание появления аллерта.
+time.sleep(1)
+alert.accept()
+
+#Аллерт: Да - Отмена.
+ALLERST_3 = ("xpath", "//button[@id = 'confirmButton']")
+driver.find_element(*ALLERST_3).click()
+time.sleep(1)
+alert.dismiss()                                      #Отклоняем аллерт.
+time.sleep(1)
+
+#Аллерт с вводом текста.
+ALLERST_4 = ("xpath", "//button[@id = 'promtButton']")
+driver.find_element(*ALLERST_4).click()
+time.sleep(1)
+alert.send_keys("Iva.AQA")
+time.sleep(1)
+alert.accept()
+time.sleep(2)
+
+
