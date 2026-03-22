@@ -10,3 +10,4 @@ select.send_keys("Green")
 assert select.get_attribute("value") == "Green", "Error in value Green"
 select.send_keys(Keys.ENTER)
 time.sleep(3)
+.
