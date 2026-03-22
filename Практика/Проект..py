@@ -4,6 +4,8 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.select import Select
+from selenium.webdriver import Keys
 import time
 
 
@@ -19,7 +21,7 @@ click_element = driver.find_element(*ELEMENTS)                                 #
 click_element.click()
 time.sleep(1)
 TEXT_BOX = ("xpath", "//span[@class = 'text']")
-click_text = driver.find_element(*TEXT_BOX)                                    #Переходим в раздел "Text Box"
+click_text = driver.find_element(*TEXT_BOX)                                    #Переходим в подраздел "Text Box"
 click_text.click()
 time.sleep(1)
 
@@ -82,7 +84,7 @@ print("✓ Клик по кнопке выполнен")
 print("Ожидание появления второй кнопки...")
 wait.until(EC.visibility_of_element_located(DELETE_BUTTON))                           # Ждем пока элемент станет видимым
 print("✓ Вторая кнопка стала видимой")
-time.sleep(5)
+time.sleep(2)
 
 #Аллерт.
 ALLERTS_DIV = ("xpath", "//div[contains(@class, 'header-text') and contains(text(), 'Alerts')]")
@@ -126,5 +128,55 @@ alert.send_keys("Iva.AQA")
 time.sleep(1)
 alert.accept()
 time.sleep(2)
+
+WIDGETS_DIV = ("xpath", "//div[contains(@class, 'header-text') and contains(text(), 'Widgets')]")            #Переходим в раздел "Elements"
+driver.find_element(*WIDGETS_DIV).click()
+time.sleep(5)
+SELECT_MENU = ("xpath", "//span[text() = 'Select Menu']")                                                    #Переходим в подраздел "Text Box
+driver.find_element(*SELECT_MENU).click()
+time.sleep(1)
+
+
+SELECT_VALUE = ("xpath", "//div[@class = 'css-19bb58m']")
+DROP1 = ("xpath", "//div[text()= 'Another root option']")
+SELECT_ONE = ("xpath", "//div[@class = 'css-hlgwow']")
+DROP2 = ("xpath", "//div[text()= 'Mr.']")
+OLD_STYLE = ("xpath", "//select[@id= 'oldSelectMenu']")
+MULTISELECT = ("xpath", "//input[@id='react-select-4-input']")
+STANDARD_SELECT = ("xpath", "//select[@id= 'cars']")
+
+driver.find_element(*SELECT_VALUE).click()                                                                  #Кликаем по выпадающему списку
+time.sleep(1)                                                                                               #Кликаем по элементу из выпадающего списка
+driver.find_element(*DROP1).click()
+time.sleep(2)
+
+
+DROPDOWN = Select(driver.find_element(*OLD_STYLE))                                                          #Обращаемся к элементам выпадающего списка
+DROPDOWN.select_by_visible_text("Black")                                                                    #Выбираем элемент по тексту "Black"
+time.sleep(2)
+
+
+select = driver.find_element(*MULTISELECT)
+select.send_keys("Green")
+assert select.get_attribute("value") == "Green", "Error in value Green"
+select.send_keys(Keys.ENTER)
+select.send_keys(Keys.ESCAPE)
+time.sleep(2)
+
+select.send_keys("Blue")
+assert select.get_attribute("value") == "Blue", "Error in value Blue"
+select.send_keys(Keys.ENTER)
+time.sleep(1)
+select.send_keys(Keys.ESCAPE)
+time.sleep(1)
+select.send_keys("Blue")
+time.sleep(1)
+END_ESC = ("xpath", "//div[@class = 'css-v7duua']")
+driver.find_element(*END_ESC).click()                                                         #Удаляем элемент по клику на "Х" в выпадающем списке
+
+
+DROPDOWN2 = Select(driver.find_element(*STANDARD_SELECT))                                     #Обращаемся к элементам выпадающего списка
+DROPDOWN2.select_by_index(4)                                                                  #Выбираем элемент по индексу
+time.sleep(5)
 
 
