@@ -6,6 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.select import Select
 from selenium.webdriver import Keys
+from selenium.webdriver import ActionChains
 import time
 
 
@@ -13,6 +14,8 @@ options = webdriver.ChromeOptions()
 options.add_argument('--incognito')
 options.page_load_strategy = 'normal'
 driver = webdriver.Chrome(options=options)
+action = ActionChains(driver)
+wait = WebDriverWait(driver, 10, poll_frequency=1)
 
 driver.get("https://demoqa.com")                                               #Открываем сайт
 time.sleep(1)
@@ -176,7 +179,27 @@ driver.find_element(*END_ESC).click()                                           
 
 
 DROPDOWN2 = Select(driver.find_element(*STANDARD_SELECT))                                     #Обращаемся к элементам выпадающего списка
-DROPDOWN2.select_by_index(4)                                                                  #Выбираем элемент по индексу
+DROPDOWN2.select_by_index(3)                                                                  #Выбираем элемент по индексу
 time.sleep(5)
 
-
+#Взаимодействие с мышью.
+SELECT_MENU = ("xpath", "//span[text() = 'Buttons']")
+B_BUTTON_LOCATOR = ("xpath", "//button[@id='doubleClickBtn']")
+RIGHT_CLICK_BUTTON = ("xpath", "//button[@id='rightClickBtn']")
+ELEMENTS = ("xpath", "(//div[@class='header-text'])[1]")
+CLICK_ME = ("xpath", "//button[text() = 'Click Me']")
+time.sleep(2)
+driver.find_element(*ELEMENTS).click()                                                        #Открываем раздел Elements
+time.sleep(1)
+driver.find_element(*SELECT_MENU).click()                                                     #Переходим в подраздел.
+time.sleep(2)
+BUTTON = driver.find_element(*B_BUTTON_LOCATOR)
+action.double_click(BUTTON).perform()                                                         #Двойной клик по кнопке
+time.sleep(2)
+BUTTON = driver.find_element(*RIGHT_CLICK_BUTTON)
+time.sleep(2)
+action.context_click(BUTTON).perform()                                                        #Клик правой кнопкой мыши
+time.sleep(2)
+element = driver.find_element(*CLICK_ME)
+action.click(element).perform()                                                               #Одинарный клик левой кнопкой мыши
+print("Раздел по взаимодействию с мышью успешно пройден ✓." )
