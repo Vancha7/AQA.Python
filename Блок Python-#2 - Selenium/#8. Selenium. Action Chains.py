@@ -56,4 +56,4 @@ action.click(element).preform() #Одинарный клик левой кноп
 # SOURCE = driver.find_element(*SOURCE_LOCATOR)
 # TARGET = driver.find_element(*TARGET_LOCATOR)
 # action.drag_and_drop(SOURCE, TARGET).perform()  # Перетаскивание
-.
+...
