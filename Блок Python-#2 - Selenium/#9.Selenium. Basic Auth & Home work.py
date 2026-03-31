@@ -80,4 +80,5 @@ time.sleep(2)
 BACK_HOME = ("xpath", "//button[text()='Back Home']")
 driver.find_element(*BACK_HOME).click()
 print("Возврат к домашней странице.")
+assert "https://www.saucedemo.com/inventory.html" == driver.current_url
 time.sleep(3)
