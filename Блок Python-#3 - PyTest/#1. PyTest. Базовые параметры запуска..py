@@ -52,3 +52,5 @@ class TestExample:
         output = driver.find_element(*self.OUTPUT_BLOCK)
         assert output.is_displayed() is True
         assert ("Alex" and "aqa@gmail.com" and "Lenina 11") in output.text
+
+        ...
