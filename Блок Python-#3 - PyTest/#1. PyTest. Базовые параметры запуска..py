@@ -1,5 +1,6 @@
-#Создание тестовых методов (тестов)
+import selenium
 
+#Создание тестовых методов (тестов)
 
 from selenium import webdriver
 import time
@@ -52,5 +53,4 @@ class TestExample:
         output = driver.find_element(*self.OUTPUT_BLOCK)
         assert output.is_displayed() is True
         assert ("Alex" and "aqa@gmail.com" and "Lenina 11") in output.text
-
-        ...
+        print("Выполняюсь после теста")
