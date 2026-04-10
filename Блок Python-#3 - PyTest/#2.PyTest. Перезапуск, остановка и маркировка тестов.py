@@ -31,3 +31,6 @@ class TestLogin:    # Название тестового класса
 
     def teardown_method(self):
         self.driver.close()
+
+
+        ###
