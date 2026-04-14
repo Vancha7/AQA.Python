@@ -9,3 +9,4 @@ def generate_data(request):
     # Генерируем данные
     request.cls.login = fake.email()
     request.cls.password = fake.password()
+###

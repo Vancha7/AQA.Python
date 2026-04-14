@@ -8,3 +8,4 @@ class TestExample:
     def test_example_cls(self):
         # Обращаясь через self к данным, мы легко получаем к ним доступ
         print(self.login, self.password)
+###
