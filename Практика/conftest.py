@@ -1,12 +1,14 @@
+import os
 import pytest
-import time
-from faker import Faker # Позволяет генерировать данные, pip3 install faker
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 
-fake = Faker() # Через этот обьект будет генерировать данные
 
-@pytest.fixture
-def generate_data(request):
-    # Генерируем данные
-    request.cls.login = fake.email()
-    request.cls.password = fake.password()
-###
+@pytest.fixture()
+def driver(request):
+    chrome_options = Options()
+    chrome_options.add_experimental_option("excludeSwitches",["enable-logging"])
+    driver = webdriver.Chrome(options=chrome_options)
+    request.cls.driver = driver
+    yield
+    driver.quit()
