@@ -8,6 +8,8 @@
 # pytest практика\test_my.py -sv        Рекомендовано.
 # pytest --lf - запускает упавшие в прошлом запуске тесты.
 # Можно использовать в связке: # pytest практика/test_my2.py -sv --lf
+# pytest project\test_demqa.py -sv
+
 
 
 #Allure
