@@ -4,11 +4,11 @@
 # pytest -sv --maxfail=2  данный параметр выставляет кол-во упавших тестов при котором, все авто-тесты остановятся. Параметр n - кол-во упавших тестов
 # @pytest.mark.имя_маркера - имя маркера может быть любым. smoke, sanity, regression - это лишь простые примеры.
 # pytest -sv -m smoke -m маркер - запустит тесты под нужным маркером
-# pytest -sv -m "smoke or regression" - запустит кейсы под двумя маркерами.
+# pytest -sv project\test_test.py -m "smoke or regression" - запустит кейсы под двумя маркерами.
 # pytest практика\test_my.py -sv        Рекомендовано.
 # pytest --lf - запускает упавшие в прошлом запуске тесты.
 # Можно использовать в связке: # pytest практика/test_my2.py -sv --lf
-# pytest project\test_demqa.py -sv
+# pytest project\test_test.py -sv
 
 
 
@@ -17,7 +17,8 @@
 #1 pytest практика/test_example.py --alluredir=allure-results
 #2 allure serve allure-results  (Получаем allure отчет)
 #3 pytest практика/test_example.py --alluredir=allure-results --clean-alluredir (удалит результаты прошлых запусков)
-
+# pytest project/test_test.py --alluredir=allure-results --clean-alluredir
+# allure serve allure-results -  Получаем allure отчет
 
 
 # Маркировка шагов
