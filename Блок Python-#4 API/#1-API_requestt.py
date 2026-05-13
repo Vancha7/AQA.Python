@@ -7,4 +7,3 @@ response = requests.get(
     }
 )
 print(response.json())
-.
